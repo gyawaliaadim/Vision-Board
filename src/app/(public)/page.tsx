@@ -3,7 +3,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigation } from "@/store/NavigationContext";
-
+import Image from "next/image";
 const Home = () => {
   const { navigate } = useNavigation();
 
@@ -20,7 +20,7 @@ const Home = () => {
         </p>
         <Button
           className="bg-red-400 hover:bg-red-500 text-white font-bold text-2xl py-6 px-16 rounded-full"
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/signin")}
         >
           Start Your Board
         </Button>
@@ -34,11 +34,13 @@ const Home = () => {
         <p className="text-center text-xl sm:text-2xl text-black dark:text-white">
           Create multiple boards, organize tasks into lists, and move them with ease. Perfect for teams or personal projects — manage everything in one place.
         </p>
-        {/* <img
-          src="/image1.png"
-          alt="Demo Image showing task boards and workflow"
-          className="w-full max-w-[750px] object-contain rounded-xl"
-        /> */}
+   <Image
+  src="/image1.png"
+  alt="Demo Image showing task boards and workflow"
+  width={750}
+  height={500}
+  className="w-full max-w-[1000px] object-contain rounded-xl"
+/>  
       </div>
 
       {/* CTA / Audience Section */}
@@ -51,7 +53,7 @@ const Home = () => {
         </p>
         <Button
           className="bg-red-400 hover:bg-red-500 text-white font-bold text-2xl py-6 px-16 rounded-full"
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/signin")}
         >
           Create Your First Board
         </Button>

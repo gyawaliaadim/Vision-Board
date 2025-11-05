@@ -23,6 +23,8 @@ export default function Sidebar() {
     return res.data.data;
   };
 
+  if (!session?.user) return null;
+
   const { data: user, isLoading,  } = useQuery({
     queryKey: ["user", userId],
     queryFn: fetchUser,
@@ -128,13 +130,16 @@ export default function Sidebar() {
       </div>
       {/* Settings Section */}
       <div className="shrink-0 border-t border-red-600/10 w-full flex p-5 justify-center items-center dark:border-red-500/10">
-        <button
-          onClick={() => navigate("/dashboard/settings")}
-          className={`flex items-center gap-3 rounded-2xl cursor-pointer px-2 py-3 w-full hover:bg-red-50 dark:hover:bg-red-900/50  ${open ? "" : "justify-center"}`}
-        >
-          <FiSettings size={18} />
-          {open && <span>Settings</span>}
-        </button>
+           <div className="flex items-center space-x-3 p-3 border rounded-xl w-fit">
+      <img
+        src={session.user.image || `https://api.dicebear.com/9.x/thumbs/svg?seed=${session.user.id}`}
+        alt={session.user.name || "User"}
+        className="w-10 h-10 rounded-full object-cover"
+      />
+      <span className="font-medium text-sm">
+        {session.user.name}
+      </span>
+    </div>
       </div>
     </aside>
   );
