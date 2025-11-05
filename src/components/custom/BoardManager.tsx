@@ -3,7 +3,6 @@ import BoardForm from '@/components/custom/BoardForm'
 import BoardItem from '@/components/custom/BoardItem'
 import { Board, Todo } from '@/types/models';
 import TodoManager from './TodoManager';
-import clsx from 'clsx';
 import { boardStyles } from '@/app/lib/utils';
 import TodoCreate from './TodoCreate';
 interface BoardManagerProps{
@@ -29,10 +28,7 @@ const BoardManager =
   OnCancelCreate
 }:BoardManagerProps) => {
     const [showBoardForm, setShowBoardForm] = useState<boolean>(false)
-    useEffect(() => {
-      console.log(boardsList)
-      }
-    , [todosList])
+  
 
     useEffect(() => {
       if(creatingBoard){

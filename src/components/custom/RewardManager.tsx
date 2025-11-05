@@ -2,12 +2,6 @@ import React, { useState } from "react";
 import RewardForm from "@/components/custom/RewardForm";
 import RewardItem from "@/components/custom/RewardItem";
 
-interface Reward {
-  id?: string;
-  title?: string;
-  description?: string;
-  xpReward?: number;
-}
 
 interface RewardManagerProps {
   rewardId?: string;

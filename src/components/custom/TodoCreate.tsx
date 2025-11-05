@@ -2,12 +2,10 @@
 
 import { Plus } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import React from "react";
 import TodoForm from "./TodoForm";
-import TodoManager from "./TodoManager";
-import { Board, Todo } from "@/types/models";
+import { Board } from "@/types/models";
 
 interface TodoCreateProps {
   boardIndex: number;

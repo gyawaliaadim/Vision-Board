@@ -1,7 +1,12 @@
 // app/api/boards/route.ts
 import { prisma } from '@/lib/prisma';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import { createResponse, createError } from '@/app/lib/utils';
+
+type updatedDataType = {
+  title?: string;
+  position?: number;
+};
 
 export async function POST(request: NextRequest) {
   const { projectId, title, position } = await request.json();
@@ -33,7 +38,7 @@ export async function PUT(request: NextRequest) {
   }
 
   try {
-    const updateData: any = {};
+    const updateData:updatedDataType = {};
     if (title !== undefined) updateData.title = title;
     if (position !== undefined) updateData.position = position;
 

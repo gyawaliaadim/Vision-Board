@@ -38,7 +38,7 @@ export default function RewardForm({
 
   const [errors, setErrors] = useState<{ rewardTitle?: string; xpReward?: string }>({});
 
-  const handleChange = (field: string, value: any) => {
+  const handleChange = (field: string, value: string | number | undefined |null) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: undefined }));
   };

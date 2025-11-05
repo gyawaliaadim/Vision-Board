@@ -4,7 +4,7 @@ export type User = {
   createdAt: Date;
   xp: number;
   projects: Project[];
-  rewardItems: RewardItem[];
+  rewardItems: RewardItemType[];
   dailyClaimedAt?: Date | null;
   weeklyClaimedAt?: Date | null;
 };

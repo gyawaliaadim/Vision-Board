@@ -1,7 +1,5 @@
 import Topbar from "@/components/custom/Topbar";
 import Footer from "@/components/custom/Footer";
-import Loading from "@/app/loading"
-import { Suspense } from "react";
 export default function Layout({
   children,
 }: Readonly<{

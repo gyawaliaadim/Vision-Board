@@ -40,7 +40,6 @@ export default function TodoForm({
   todoIndex,
   boardId,
   boardsList,
-  todosList = [],
   creatingTodo = false,
   onCancel,
 }: TodoFormProps) {
@@ -69,7 +68,7 @@ export default function TodoForm({
     setSelectedBoard(boardFound);
   }, [form.boardId, boardsList]);
 
-  const handleChange = (field: string, value: any) => {
+  const handleChange = (field: string, value: string |number |undefined |null) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: undefined }));
   };

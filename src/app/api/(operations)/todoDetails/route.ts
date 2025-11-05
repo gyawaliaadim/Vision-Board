@@ -2,6 +2,14 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest } from "next/server";
 import { createResponse, createError } from "@/app/lib/utils";
 
+interface updatedDataType {
+  boardId?: string;
+  title?: string;
+  description?: string;
+  xpReward?: number;
+  position?: number;
+}
+
 // Create a new todo
 export async function POST(request: NextRequest) {
   const { boardId, title, description, xpReward, position } = await request.json();
@@ -29,7 +37,7 @@ export async function PUT(request: NextRequest) {
   const { id, boardId, title, description, xpReward, position } = await request.json();
 
   if (!id || !boardId) return createError("Todo ID or Board ID is missing", 400);
-  const updateData: any = {};
+  const updateData: updatedDataType = {};
   if (boardId !== undefined) updateData.boardId = boardId;
   if (title !== undefined) updateData.title = title;
   if (description !== undefined) updateData.description = description;

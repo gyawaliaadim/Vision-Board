@@ -2,6 +2,13 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest } from "next/server";
 import { createResponse, createError } from "@/app/lib/utils";
 
+
+interface updatedDataType {
+  title?: string;
+  description?: string;
+  priceXp?: number;
+}
+
 // Create a new reward
 export async function POST(request: NextRequest) {
   const { userId, title, description, priceXp } = await request.json();
@@ -51,7 +58,7 @@ export async function PUT(request: NextRequest) {
     return createError("Reward ID is required", 400);
   }
 
-  const updateData: any = {};
+  const updateData: updatedDataType = {};
   if (title !== undefined) updateData.title = title;
   if (description !== undefined) updateData.description = description;
   if (priceXp !== undefined) updateData.priceXp = priceXp;

@@ -3,10 +3,8 @@
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import { PencilIcon, TrashIcon } from "lucide-react"; // or your preferred SVG icon
-import { useState } from "react";
 import axios from "axios";
 import { useQueryClient } from "@tanstack/react-query";
-import { flattenError } from "zod";
 import { useSession } from "next-auth/react";
 interface TodoItemProps {
   todoIndex: number;
@@ -27,7 +25,6 @@ export default function TodoItem({
   xpReward,
   handleEdit,
   todoId,
-  boardId,
 
 }: TodoItemProps) {
   const queryClient = useQueryClient();
@@ -35,7 +32,7 @@ export default function TodoItem({
 
   const handleDeleteTodo = async () => {
 
-      let userChoice = confirm("Are you sure you want to proceed?");
+      const userChoice = confirm("Are you sure you want to proceed?");
     
     if (userChoice) {
       {
@@ -65,9 +62,8 @@ export default function TodoItem({
       queryClient.invalidateQueries();
     }
     
-  } catch (error: any) {
-    console.error("Error completing todo:", error?.response?.data || error.message);
-    throw new Error(error?.response?.data?.message || "Failed to complete todo");
+  } catch  {
+    console.log("Error completing todo:");
   }
 }
 

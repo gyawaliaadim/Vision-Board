@@ -2,11 +2,9 @@
 
 import { Plus } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import React from "react";
 import BoardForm from "./BoardForm";
-import BoardManager from "./BoardManager";
 import { Board } from "@/types/models";
 import { boardStyles } from "@/app/lib/utils";
 

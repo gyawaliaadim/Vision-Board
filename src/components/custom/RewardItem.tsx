@@ -59,9 +59,9 @@ const handleClaimReward = async () => {
     } else {
       console.log(res.data.message || "Purchase failed");
     }
-  } catch (err: any) {
-    console.log("Error claiming reward:", err?.response?.data || err?.message);
-    alert(err?.response?.data?.message || "Failed to purchase");
+  } catch {
+    console.log("Error claiming reward:");
+    alert("Failed to purchase");
   }
 };
 

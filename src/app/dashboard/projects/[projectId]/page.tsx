@@ -1,19 +1,13 @@
 "use client";
-import { Plus } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
 import axios from "axios";
 import * as React from "react";
 import { useSession } from "next-auth/react";
 import { useNavigation } from "@/store/NavigationContext";
-import BoardItem from "@/components/custom/BoardItem";
 import { Board } from "@/types/models";
 import ProjectHeader from "@/components/custom/ProjectHeader"; // <— imported here
-import { Project } from "@/types/models";
 import BoardManager from "@/components/custom/BoardManager";
 import BoardCreate from "@/components/custom/BoardCreate";
 const ProjectPage = ({ params }: { params: Promise<{ projectId: string }> }) => {
@@ -42,7 +36,6 @@ const ProjectPage = ({ params }: { params: Promise<{ projectId: string }> }) => 
     enabled: !!projectId && !!session?.user.id,
   });
 
-const queryClient = useQueryClient();
   if (isLoading) return <div className="p-10 text-lg">Loading project...</div>;
   if (error || !project) return <div>Project not found or unauthorized</div>;
 

@@ -1,14 +1,13 @@
 // lib/utils/response.ts
 import { NextResponse } from 'next/server';
-import { Board, Todo } from '@/types/models';
-export function createResponse(message: string, data: any = null, status: number) {
+export function createResponse(message, data, status) {
   return NextResponse.json(
     { success: true, message, data },
     { status }
   );
 }
 import clsx from 'clsx';
-export function createError(message: string, status: number) {
+export function createError(message, status) {
   return NextResponse.json(
     { success: false, message },
     { status }
@@ -16,10 +15,10 @@ export function createError(message: string, status: number) {
 }
 
 export function calculateNewPosition(
-  boards: { position: number }[],
-  fromIndex: number,
-  toIndex: number
-): number {
+  boards,
+  fromIndex,
+  toIndex
+) {
   // Make sure array is sorted by position
   const sorted = [...boards].sort((a, b) => a.position - b.position);
 

@@ -34,11 +34,11 @@ const Home = () => {
         <p className="text-center text-xl sm:text-2xl text-black dark:text-white">
           Create multiple boards, organize tasks into lists, and move them with ease. Perfect for teams or personal projects — manage everything in one place.
         </p>
-        <img
+        {/* <img
           src="/image1.png"
           alt="Demo Image showing task boards and workflow"
           className="w-full max-w-[750px] object-contain rounded-xl"
-        />
+        /> */}
       </div>
 
       {/* CTA / Audience Section */}

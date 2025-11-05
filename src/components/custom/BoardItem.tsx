@@ -26,7 +26,7 @@ boardId
   
 const queryClient = useQueryClient();
   const handleDeleteBoard = async()=>{
-    let userChoice = confirm("Are you sure you want to proceed?");
+    const userChoice = confirm("Are you sure you want to proceed?");
     if (userChoice){
 const res = await axios.delete(
   `${process.env.NEXT_PUBLIC_API}/boardDetails`,

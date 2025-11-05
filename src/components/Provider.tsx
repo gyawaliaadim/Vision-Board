@@ -7,9 +7,8 @@ import { ReactNode } from "react";
 import {
   QueryClient,
   QueryClientProvider,
-  useQuery,
+
 } from '@tanstack/react-query'
-import { Suspense } from "react";
 export function Provider({ children }: { children: ReactNode }) {
 
   const queryClient = new QueryClient()

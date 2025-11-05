@@ -5,7 +5,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import React from "react";
 import RewardForm from "./RewardForm"; // make sure you have this
-import { Board, RewardItemType } from "@/types/models";
 
 
 export default function RewardCreate() {

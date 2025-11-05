@@ -1,17 +1,15 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { FiHome, FiShoppingCart, FiFolder, FiSettings, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import React, { useState } from "react";
+import { FiHome, FiShoppingCart, FiSettings, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useNavigation } from "@/store/NavigationContext";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import ToggleTheme from "./ToggleTheme";
 import axios from "axios";
-type SidebarProps = {
-  storageKey?: string;
-};
+
 import { useQuery } from "@tanstack/react-query";
-export default function Sidebar({ storageKey = "app.sidebar.open" }: SidebarProps) {
+export default function Sidebar() {
   const [open, setOpen] = useState<boolean>(true);
   const { navigate } = useNavigation();
   const { data: session } = useSession();
@@ -25,7 +23,7 @@ export default function Sidebar({ storageKey = "app.sidebar.open" }: SidebarProp
     return res.data.data;
   };
 
-  const { data: user, isLoading, error, refetch } = useQuery({
+  const { data: user, isLoading,  } = useQuery({
     queryKey: ["user", userId],
     queryFn: fetchUser,
     enabled: !!userId, // only run if userId exists
@@ -35,7 +33,7 @@ export default function Sidebar({ storageKey = "app.sidebar.open" }: SidebarProp
   return (
     <aside
       className={`transition-all flex flex-col justify-between duration-300  bg-white dark:bg-black text-black dark:text-white border-r border-red-900/60 dark:border-red-500/10 ease-in ${open ? "w-64" : "w-16"} h-screen`}
-      aria-expanded={open}
+  
     >
       <div>
       {/* Top Section */}

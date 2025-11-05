@@ -1,26 +1,24 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import RewardManager from "@/components/custom/RewardManager";
 import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import clsx from "clsx";
 import RewardCreate from "@/components/custom/RewardCreate";
 import { useNavigation } from "@/store/NavigationContext";
 import { RewardItemType } from "@/types/models"; // make sure Reward type exists
-import { useQueryClient } from "@tanstack/react-query";
 export default function RewardsPage() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const userId = session?.user.id;
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const { navigate } = useNavigation();
   // Fetch user XP
 
   const fetchRewards = async (): Promise<RewardItemType[] | null> => {
     try {
       const res = await axios.get(`${process.env.NEXT_PUBLIC_API}/rewardDetails`, {
-        params: { userId: session?.user.id },
+        params: { userId: userId },
       });
       if (res.data.success) return res.data.data;
       return null;
@@ -31,7 +29,7 @@ export default function RewardsPage() {
     }
   };
   // Trigger glow when XP changes
-  const { data: rewardItems, isLoading, error, refetch } = useQuery({
+  const { data: rewardItems, } = useQuery({
     queryKey: ["rewards", session?.user.id],
     queryFn: fetchRewards,
     enabled: !!session?.user.id,
