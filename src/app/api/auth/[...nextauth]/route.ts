@@ -14,21 +14,24 @@ export const authOptions : NextAuthOptions = {
   ],
   callbacks: {
     // Step 1: store user.id in JWT
-    async jwt({ token, user }) {
-      if (user) {
-        // user exists on first signIn
-        let dbUser = await prisma.user.findUnique({
-          where: { email: user?.email?user.email:"" },
-        });
+  async jwt({ token, user, account }) {
+  // Only run this when the user first signs in
+  if (account && user) {
+    let dbUser = await prisma.user.findUnique({
+      where: { email: user.email! },
+    });
 
-        if (!dbUser) {
-          dbUser = await prisma.user.create({ data: { email: user?.email?user.email:"" } });
-        }
+    if (!dbUser) {
+      dbUser = await prisma.user.create({
+        data: { email: user.email! },
+      });
+    }
 
-        token.id = dbUser.id; // store DB id in token
-      }
-      return token;
-    },
+    token.id = dbUser.id;
+  }
+
+  return token;
+},
 
     // Step 2: expose token.id in session
     async session({ session, token }) {
