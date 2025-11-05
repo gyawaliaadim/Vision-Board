@@ -23,13 +23,13 @@ export default function Sidebar() {
     return res.data.data;
   };
 
-  if (!session?.user) return null;
-
-  const { data: user, isLoading,  } = useQuery({
+  const { data: user, isLoading } = useQuery({
     queryKey: ["user", userId],
     queryFn: fetchUser,
-    enabled: !!userId, // only run if userId exists
+    enabled: !!userId && !!session?.user, // only run if userId and session exist
   });
+
+  if (!session?.user) return null;
 
 
   return (
@@ -131,10 +131,12 @@ export default function Sidebar() {
       {/* Settings Section */}
       <div className="shrink-0 border-t border-red-600/10 w-full flex p-5 justify-center items-center dark:border-red-500/10">
            <div className="flex items-center space-x-3 p-3 border rounded-xl w-fit">
-      <img
+      <Image
         src={session.user.image || `https://api.dicebear.com/9.x/thumbs/svg?seed=${session.user.id}`}
         alt={session.user.name || "User"}
-        className="w-10 h-10 rounded-full object-cover"
+        width={40}
+        height={40}
+        className="rounded-full object-cover"
       />
       <span className="font-medium text-sm">
         {session.user.name}
