@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(uuid())
+  email          String    @unique
+  createdAt      DateTime  @default(now())
+  xp             Int       @default(0)
+  projects       Project[]
+  rewardItems    RewardItem[]
+  dailyClaimedAt DateTime?                         // for daily reward cooldown
+  weeklyClaimedAt DateTime?
+}
+
+model Project {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  createdAt DateTime @default(now())
+  boards    Board[]
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Board {
+  id          String   @id @default(uuid())
+  position    Float
+  projectId   String
+  title       String
+  todos       Todo[]
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Todo {
+  id          String   @id @default(uuid())
+  position    Float
+  boardId     String
+  title       String
+  description String?
+  xpReward    Int      @default(0)   // XP for completing this todo
+  completed   Boolean  @default(false)
+  board       Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
+}
+
+model RewardItem {
+  id          String   @id @default(uuid())
+  userId      String
+  title       String
+  description String?
+  priceXp     Int
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
