@@ -1,7 +1,8 @@
 "use client";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import React, { useState } from "react";
-import { FiHome, FiShoppingCart, FiSettings, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiHome, FiShoppingCart, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useNavigation } from "@/store/NavigationContext";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
@@ -10,6 +11,7 @@ import axios from "axios";
 
 import { useQuery } from "@tanstack/react-query";
 export default function Sidebar() {
+  const pathname = usePathname();
   const [open, setOpen] = useState<boolean>(true);
   const { navigate } = useNavigation();
   const { data: session } = useSession();
@@ -88,30 +90,40 @@ export default function Sidebar() {
             </div>
 
             </li>
-          <li>
-            <button
-              onClick={() => navigate("/dashboard")}
-              className={`flex items-center gap-3 rounded-md px-2 py-2 hover:bg-red-50 dark:hover:bg-red-900/50  w-full cursor-pointer ${open ? "" : "justify-center"}`}
-            >
-              <FiHome size={18} />
-              {open && <span className="truncate">Dashboard</span>}
-            </button>
-          </li>
-          <li>
-            <button
-              onClick={() => navigate("/dashboard/rewards")}
-              className={`flex items-center gap-3 rounded-md px-2 py-2 hover:bg-red-50 dark:hover:bg-red-900/50 cursor-pointer w-full ${open ? "" : "justify-center"}`}
-            >
-              <FiShoppingCart size={18} />
-              {open && <span className="truncate">Rewards</span>}
-            </button>
-          </li>
+         <li>
+  <button
+    onClick={() => navigate("/dashboard")}
+    className={clsx(
+      "flex items-center gap-3 rounded-md px-2 py-2 hover:bg-red-50 dark:hover:bg-red-900/50 w-full cursor-pointer",
+      open ? "" : "justify-center",
+      pathname === "/dashboard" && "text-red-500 font-semibold"
+    )}
+  >
+    <FiHome size={18} />
+    {open && <span className="truncate">Dashboard</span>}
+  </button>
+</li>
+
+<li>
+  <button
+    onClick={() => navigate("/dashboard/rewards")}
+    className={clsx(
+      "flex items-center gap-3 rounded-md px-2 py-2 hover:bg-red-50 dark:hover:bg-red-900/50 cursor-pointer w-full",
+      open ? "" : "justify-center",
+      pathname === "/dashboard/rewards" && "text-red-500 font-semibold"
+    )}
+  >
+    <FiShoppingCart size={18} />
+    {open && <span className="truncate">Rewards</span>}
+  </button>
+</li>
+
           <li>
             <div className=" border-t my-2 border-red-600/10 dark:border-red-500/10" />
           </li>
           <li
   className={clsx(
-    "flex items-center gap-2 p-4 m-2",
+    "flex items-center gap-2 m-2",
     "bg-linear-to-r from-[#374893] to-[#a94a79] text-white",
     "hover:scale-110 focus:shadow-[0_0_30px_rgba(200,110,180,0.9)] hover:shadow-[0_0_30px_rgba(200,110,180,0.9)]",
     "focus:brightness-110 hover:brightness-110",
@@ -120,8 +132,8 @@ export default function Sidebar() {
     {"scale-110 brightness-110 duration-600":isLoading}
   )}
 >
-  {open && <span className="truncate">XP: {user?.xp ?? 0}</span>}
-  {!open && <span>⭐</span>}
+  {open && <span className="truncate m-4">XP: {user?.xp ?? 0}</span>}
+  {!open && <span className="m-2">{user?.xp ?? 0}</span>}
 </li>
 
         </ul>

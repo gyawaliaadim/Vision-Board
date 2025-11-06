@@ -97,9 +97,6 @@ export default function Topbar({ className }: { className?: string }) {
               <DropdownMenuItem className="cursor-pointer"  onClick={()=>navigate("/dashboard")}>
                 Dashboard
               </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer"  onClick={()=>navigate("/dashboard/settings")}>
-                Settings
-              </DropdownMenuItem>
               <DropdownMenuItem  className="cursor-pointer" onClick={() => signOut()}>
                 Sign out
               </DropdownMenuItem>
