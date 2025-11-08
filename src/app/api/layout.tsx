@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 export const metadata: Metadata = {
-  title: 'Settings',
+  title: 'Invalid API Route Access',
 };
 
 export default function Layout({

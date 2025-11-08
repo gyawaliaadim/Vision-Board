@@ -1,5 +1,11 @@
 import Topbar from "@/components/custom/Topbar";
 import Footer from "@/components/custom/Footer";
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: 'Vision Board',
+};
+
+
 export default function Layout({
   children,
 }: Readonly<{

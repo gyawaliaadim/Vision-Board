@@ -1,7 +1,8 @@
 "use client";
 
 
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import axios from "axios";
 import * as React from "react";
 import { useSession } from "next-auth/react";
@@ -35,6 +36,11 @@ const ProjectPage = ({ params }: { params: Promise<{ projectId: string }> }) => 
     queryFn: fetchProjectById,
     enabled: !!projectId && !!session?.user.id,
   });
+    useEffect(() => {
+    if (project?.title) {
+      document.title = `${project.title}` || `Project Dashboard`;
+    }
+  }, [project]);
 
   if (isLoading) return <div className="p-10 text-lg">Loading project...</div>;
   if (error || !project) return <div>Project not found or unauthorized</div>;
